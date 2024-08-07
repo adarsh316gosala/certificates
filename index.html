@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Certificate Login</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Navbar styles */
+        nav {
+            background-color: royalblue;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #fff;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 20px auto;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #message a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        #message a:hover {
+            text-decoration: underline;
+        }
+
+        p {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .highlight {
+            color: green;
+            font-weight: bold;
+        }
+
+        .error {
+            color: red;
+        }
+        #cn{
+          padding-left: 200px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">
+            <img src="https://www.innogeecks.com/wp-content/uploads/2020/06/Logo_with_title_without_technologies_white.png" alt="Logo">
+           <h2 id="cn">    
+            Innogeecks Technologies Private Limited</h2>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <h2>Get Certificate</h2>
+        <form id="loginForm">
+            <label for="name">Name Of The Student :</label>
+            <input type="text" id="name" name="name" >
+            
+            <label for="id">Student ID:</label>
+            <input type="text" id="id" name="id" required>
+            
+            <button type="submit">Search</button>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const id = document.getElementById('id').value;
+            const name = document.getElementById('name').value;
+
+            // Simulated database of IDs with names, attendance, and certificate data URLs
+            const database = {
+                '21VV1A0134': { name: 'B.SAI VENKATA SURYA VAISHNAVI', attendance: 90, certificate: 'https://drive.google.com/file/d/1gU63XgKb4iXsnb4bYhRdTGr6v1X2oLBE/view' },
+                '21VV1A0102': { name: 'B.VAMSI', attendance: 90, certificate: 'https://drive.google.com/file/d/1pRGFXsO7r0fWyMplMTp7_qaq2eltX4WU/view' },
+                '21F01A0527': { name: 'CHAKKA ANANTH KUMAR', attendance: 90, certificate: 'https://drive.google.com/file/d/1eA8ZFS9kv21pZBbln09vWfX1nCbEyOXW/view' },
+                '21VV1A0108': { name: 'G.JAYA VENKATA MADHU', attendance: 90, certificate: 'https://drive.google.com/file/d/1LKFs5GCy3RTGhUOf67veLhKACndVS5gd/view' },
+                '21VV1A0112': { name: 'kalyani', attendance: 90, certificate: 'https://drive.google.com/file/d/1ZNItjX8EwBF9idzagip6OxSCOA1pFLyq/view' },
+                '21VV1A0109': { name: 'G.VAHINI', attendance: 90, certificate: 'https://drive.google.com/file/d/1prnwK3MjljsETdTuk7HmxVpcyI-bRc2w/view' },
+                '21VV1A0115': { name: 'K.KARTHIKEYA', attendance: 90, certificate: 'https://drive.google.com/file/d/1wa36grRJQ2R0yZeojPFKdV6hcJJEE9NE/view' },
+                '21VV1A0136': { name: 'M.GANESH MANIKANTA', attendance: 90, certificate: 'https://drive.google.com/file/d/1CP4YZaj012XEelqJGcX2qKz41fp-VMtD/view' },
+                '21VV1A0119': { name: 'M.P G DURGA SUPRIYA', attendance: 90, certificate: 'https://drive.google.com/file/d/1j_3d2iYKf3pbNE4oy1FAsvKD_v3g1_42/view' },
+                '21VV1A0116': { name: 'M.LOKESH', attendance: 90, certificate: 'https://drive.google.com/file/d/1yt6U1l5u1Ka4Ba2qjCQHZMuZy67B_iJ-/view' },
+                '22VV5A0570': { name: 'MANDALA MANEESHA', attendance: 90, certificate: 'https://drive.google.com/file/d/1bc3keENEVIp8zQ-mwmFk8qQbcUHODGhu/view' },
+                '21VV1A0101': { name: 'N.BHUVANA SRI', attendance: 90, certificate: 'https://drive.google.com/file/d/1BtfmA9T9ogdP1ATM6F8HMSetULnDqqaL/view' },
+                '21VV1A0120': { name: 'N.LATHISH KUMAR', attendance: 90, certificate: 'https://drive.google.com/file/d/1bNhPjqKDJONxTfegxfr9a-KkH1o113Om/view' },
+                '21VV1A0106': { name: 'P.DHANALAKSHMI', attendance: 90, certificate: 'https://drive.google.com/file/d/1s2J_tgHPwadSECJiHR6bCEPH9PVbvr4i/view' },
+                '21VV1A0122': { name: 'PEDADA PADMA', attendance: 90, certificate: 'https://drive.google.com/file/d/1vW8s0Oxp8toE2ahVIot91qDoEgqEb4kx/view' },
+                '21VV1A0126': { name: 'P.SAHITHI', attendance: 90, certificate: 'https://drive.google.com/file/d/1E6nCli2LQ0z5_L9vdCX8NfGxsriTGO49/view' },
+                '21VV1A0121': { name: 'P.TEJASWINI', attendance: 90, certificate: 'https://drive.google.com/file/d/1P-5EUZYXj25ScesNQXK-sqlMveEA8a03/view' },
+                '21VV1A0131': { name: 'S.JHANSI RANI', attendance: 90, certificate: 'https://drive.google.com/file/d/1-ntYfVGYhRh-wpLesa5UW4PAw1axK5E8/view' },
+                '21VV1A0129': { name: 'S.RUPA', attendance: 90, certificate: 'https://drive.google.com/file/d/1AgomPf3-nAaZfbsgwF_5T0DpWMd_nZK_/view' },
+                '21VV1A0130': { name: 'S.Sai', attendance: 90, certificate: 'https://drive.google.com/file/d/1YO7cm6-FEtF8BfJdFfQ7RGXa9RghN4sT/view' },
+                '21VV1A0127': { name: 'S.SANTHU', attendance: 90, certificate: 'https://drive.google.com/file/d/1PqMGlcNJV8_bp2UKRI1DQRnliPvV0lmF/view' },
+                '21VV1A0128': { name: 'SAMPATHIRAO JAYASRI', attendance: 90, certificate: 'https://drive.google.com/file/d/1oawFQ1E2RNvYorRUyI_gpT-dQ5lmxEJN/view' },
+                '22VV5A3138': { name: 'SHAIK KARISHMA', attendance: 90, certificate: 'https://drive.google.com/file/d/1GPNnHtI5CAQlq1GsnDuGxckuofp-bbsQ/view' },
+                '21VV1A0107': { name: 'VINAY KUMAR', attendance: 90, certificate: 'https://drive.google.com/file/d/1aynAzCFhuNYzsLclPFWIe1Wwvxo8HXYy/view' },
+            };
+
+            if (database[id]) {
+                const studentName = database[id].name;
+                const attendance = database[id].attendance;
+                const certificateUrl = database[id].certificate;
+
+                if (attendance >= 85) {
+                    document.getElementById('message').innerHTML = 
+                        `<p>Congrats <span class="highlight">${studentName}</span>! You can view your certificate <a href="${certificateUrl}" target="_blank">here</a>.</p>`;
+                } else {
+                    document.getElementById('message').innerHTML = 
+                        `<p>Sorry <span class="highlight">${studentName}</span>, you are not eligible for a certificate due to low attendance. Your attendance is ${attendance}%. You need at least 85% to be eligible for the certificate.</p>`;
+                }
+            } else {
+                document.getElementById('message').innerHTML = 
+                    '<p class="error">Invalid ID. Please try again.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
